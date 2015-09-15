@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">Gerenciador de Arquivos</string>
+
+    <string name="hello_world">Olá Mundo</string>
+    <string name="action_settings">Configurações</string>
+    <string name="lbl_password">Senha</string>
+    <string name="lbl_login">Usuário</string>
+    <string name="lbl_enter">Entrar</string>
+    <string name="msg_welcome">Bem vindo %s!</string>
+    <string name="lbl_peso">peso</string>
+    <string name="lbl_altura">Altura</string>
+    <string name="lbl_calcular">Calcular</string>
+    <string name="msg_imc">Seu IMC : %s</string>
+    <string name="name">Nome</string>
+
+    <string name="description">Descrição</string>
+    <string name="bt_save">Salvar</string>
+    <string name="lbl_add">Adicionar</string>
+    <string name="msg_salvo">Salvo</string>
+    <string name="msg_required">Campo Obrigatorio!</string>
+    <string name="msg_success_save">Salvo com sucesso!</string>
+</resources>
