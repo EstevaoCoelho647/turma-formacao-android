@@ -19,4 +19,11 @@
     <string name="msg_salvo">Saved</string>
     <string name="msg_required">Required String!</string>
     <string name="msg_success_save">Salvo com sucesso!</string>
+    <string name="lbl_delete">Delete</string>
+    <string name="lbl_edit">Edit</string>
+    <string name="mgs_delete">Delete successful</string>
+    <string name="lbl_confirm">Confirm</string>
+    <string name="msg_confirm_delete">Want to delete this register?</string>
+    <string name="lbl_yes">Yes</string>
+    <string name="lbl_no">No</string>
 </resources>
