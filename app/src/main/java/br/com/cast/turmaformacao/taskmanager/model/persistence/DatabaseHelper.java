@@ -9,22 +9,23 @@ import br.com.cast.turmaformacao.taskmanager.util.ApplicationUtil;
 /**
  * Created by Administrador on 16/09/2015.
  */
-public class DatabaseHelper extends SQLiteOpenHelper{
+public class DatabaseHelper extends SQLiteOpenHelper {
 
-    private static final String DATABASE_NAME ="taskmanagerdb";
+    private static final String DATABASE_NAME = "taskmanagerdb";
     private static final int DATABASE_VERSION = 1;
 
     private DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
-    public static DatabaseHelper getInstance(){
+    public static DatabaseHelper getInstance() {
         return new DatabaseHelper(ApplicationUtil.getContext());
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-     db.execSQL(TaskContract.getCreateTableScript());
+        db.execSQL(TaskContract.getCreateTableScript());
+        db.execSQL((LabelContract.getCreateTableScript()));
     }
 
     @Override

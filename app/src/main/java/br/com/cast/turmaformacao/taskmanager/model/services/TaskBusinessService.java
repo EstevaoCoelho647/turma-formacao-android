@@ -1,8 +1,6 @@
 package br.com.cast.turmaformacao.taskmanager.model.services;
 
-import android.content.Context;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import br.com.cast.turmaformacao.taskmanager.model.entities.Task;
