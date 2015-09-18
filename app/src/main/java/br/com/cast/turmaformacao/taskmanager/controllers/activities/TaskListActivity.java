@@ -131,7 +131,7 @@ public class TaskListActivity extends AppCompatActivity {
 
 
     private void onMenuAddClick() {
-        Intent goToTaskFormActivity = new Intent(TaskListActivity.this, TaskFormActivity.class);
+        Intent goToTaskFormActivity = new Intent(TaskListActivity.this, LabelFormActivity.class);
         startActivity(goToTaskFormActivity);
     }
 }

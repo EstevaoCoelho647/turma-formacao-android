@@ -37,4 +37,5 @@ public enum Color {
     public String getHex() {
         return hex;
     }
+
 }

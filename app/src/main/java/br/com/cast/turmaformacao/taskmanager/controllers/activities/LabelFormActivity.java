@@ -4,11 +4,16 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import br.com.cast.turmaformacao.taskmanager.R;
+import br.com.cast.turmaformacao.taskmanager.controllers.adapters.ColorListAdapter;
+import br.com.cast.turmaformacao.taskmanager.model.entities.Color;
 import br.com.cast.turmaformacao.taskmanager.model.entities.Label;
 
 import br.com.cast.turmaformacao.taskmanager.model.services.LabelBusinessService;
@@ -19,6 +24,9 @@ import br.com.cast.turmaformacao.taskmanager.util.FormHelper;
  * Created by Administrador on 17/09/2015.
  */
 public class LabelFormActivity extends AppCompatActivity {
+
+    private ListView listViewTaskList;
+    private Label selectedLabel;
 
     EditText editTextDescription;
     EditText editTextNome;
@@ -56,7 +64,15 @@ public class LabelFormActivity extends AppCompatActivity {
 
     private void bindSpinnerColor() {
         Spinner spinnerColor = (Spinner) findViewById(R.id.spinnerColor);
-        // spinnerColor.setAdapter(new ColorAdapter(LabelFormActivity.this, Color.values()));
+        registerForContextMenu(spinnerColor);
+        spinnerColor.setAdapter(new ColorListAdapter(LabelFormActivity.this, Color.values()));
+        spinnerColor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               ColorListAdapter adapter = (ColorListAdapter) listViewTaskList.getAdapter();
+                selectedLabel= (Label) adapter.getItem(position);
+            }
+        });
     }
 
     @Override
@@ -84,7 +100,8 @@ public class LabelFormActivity extends AppCompatActivity {
         if (!FormHelper.validateRequired(requiredMessage, editTextNome, editTextDescription)) {
             binLabel();
             LabelBusinessService.save(label);
-            Toast.makeText(LabelFormActivity.this, R.string.msg_success_save, Toast.LENGTH_SHORT).show();
+            Toast.makeText(LabelFormActivity.this, LabelBusinessService.findAll().toString()/*R.string.msg_success_save */, Toast.LENGTH_SHORT).show();
+            LabelFormActivity.this.finish();
         }
     }
 

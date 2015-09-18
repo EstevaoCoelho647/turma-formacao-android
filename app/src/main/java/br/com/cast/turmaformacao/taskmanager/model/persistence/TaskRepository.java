@@ -21,11 +21,10 @@ public final class TaskRepository {
         DatabaseHelper databaseHelper = DatabaseHelper.getInstance();
         SQLiteDatabase db = databaseHelper.getWritableDatabase();
         ContentValues values = TaskContract.getContentValues(task);
-        if (task.getId() == null){
+
+        if (task.getId() == null) {
             db.insert(TaskContract.TABLE, null, values);
-        }
-        else
-        {
+        } else {
             String where = TaskContract.ID + " = ?";
             String[] params = {task.getId().toString()};
             db.update(TaskContract.TABLE, values, where, params);
@@ -39,17 +38,16 @@ public final class TaskRepository {
         SQLiteDatabase db = databaseHelper.getReadableDatabase();
 
 
-
         Cursor cursor = db.query(TaskContract.TABLE, TaskContract.COLUNS, null, null, null, null, TaskContract.ID);
         List<Task> values = TaskContract.getTasks(cursor);
 
 
         db.close();
         databaseHelper.close();
-        return  values;
+        return values;
     }
 
-    public static void delete(long id){
+    public static void delete(long id) {
         DatabaseHelper databaseHelper = DatabaseHelper.getInstance();
         SQLiteDatabase db = databaseHelper.getReadableDatabase();
 
