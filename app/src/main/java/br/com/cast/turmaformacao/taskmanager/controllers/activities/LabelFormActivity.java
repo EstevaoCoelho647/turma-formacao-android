@@ -1,32 +1,27 @@
 package br.com.cast.turmaformacao.taskmanager.controllers.activities;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import br.com.cast.turmaformacao.taskmanager.R;
 import br.com.cast.turmaformacao.taskmanager.controllers.adapters.ColorListAdapter;
 import br.com.cast.turmaformacao.taskmanager.model.entities.Color;
 import br.com.cast.turmaformacao.taskmanager.model.entities.Label;
-
 import br.com.cast.turmaformacao.taskmanager.model.services.LabelBusinessService;
-
 import br.com.cast.turmaformacao.taskmanager.util.FormHelper;
 
 /**
  * Created by Administrador on 17/09/2015.
  */
 public class LabelFormActivity extends AppCompatActivity {
-
-    private ListView listViewTaskList;
-    private Label selectedLabel;
+    private View viewColor;
 
     EditText editTextDescription;
     EditText editTextNome;
@@ -40,7 +35,7 @@ public class LabelFormActivity extends AppCompatActivity {
         setContentView(R.layout.activity_label_form);
 
         initLabel();
-        bindSpinnerColor();
+        bindViewColor();
         bindEditTextDescription();
         bindEditTextName();
     }
@@ -62,17 +57,29 @@ public class LabelFormActivity extends AppCompatActivity {
         editTextDescription = (EditText) findViewById(R.id.editTextName);
     }
 
-    private void bindSpinnerColor() {
-        Spinner spinnerColor = (Spinner) findViewById(R.id.spinnerColor);
-        registerForContextMenu(spinnerColor);
-        spinnerColor.setAdapter(new ColorListAdapter(LabelFormActivity.this, Color.values()));
-        spinnerColor.setOnClickListener(new View.OnClickListener() {
+    private void bindViewColor() {
+        viewColor = findViewById(R.id.viewPalletColors);
+        viewColor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               ColorListAdapter adapter = (ColorListAdapter) listViewTaskList.getAdapter();
-                selectedLabel= (Label) adapter.getItem(position);
+                AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(LabelFormActivity.this);
+                final ColorListAdapter adapter = new ColorListAdapter(LabelFormActivity.this);
+                dialogBuilder.setAdapter(adapter, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        updateColor(adapter.getItem(which));
+                    }
+                });
+                dialogBuilder.setTitle("Select Color");
+                dialogBuilder.setNeutralButton("Cancel", null);
+                dialogBuilder.show();
             }
         });
+    }
+
+
+    private void updateColor(Color itemId) {
+        viewColor.setBackgroundColor(android.graphics.Color.parseColor(itemId.getHex()));
     }
 
     @Override
